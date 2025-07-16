@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Background</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Image to Remove Background</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Remove Background</button>
+        </form>
+
+        {% if processed_image %}
+        <div class="result">
+            <h2>Your Processed Image:</h2>
+            <img src="{{ url_for('static', filename=processed_image) }}" alt="Processed Image">
+            <a href="{{ url_for('static', filename=processed_image) }}" download>Download Image</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
