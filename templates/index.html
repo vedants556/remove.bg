@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remove Background</title>
+    <title>AI Background Remover</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
     <div class="container">
-        <h1>Upload Image to Remove Background</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="image" accept="image/*" required>
-            <button type="submit">Remove Background</button>
-        </form>
+        <h1>AI Background Remover</h1>
 
-        {% if processed_image %}
-        <div class="result">
-            <h2>Your Processed Image:</h2>
-            <img src="{{ url_for('static', filename=processed_image) }}" alt="Processed Image">
-            <a href="{{ url_for('static', filename=processed_image) }}" download>Download Image</a>
+        <div class="drop-zone" id="drop-zone">
+            <span class="drop-zone__prompt">Drag & Drop your image here or Click to Upload</span>
+            <input type="file" name="image" id="file-input" accept="image/*" class="drop-zone__input">
+            <div class="preview-container" id="preview-container">
+                <img id="image-preview" src="#" alt="Image Preview">
+            </div>
+            <p id="file-name-display" class="file-name-display"></p>
         </div>
-        {% endif %}
-    </div>
+
+        <button type="button" id="upload-button" disabled>Remove Background</button>
+
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span class="progress-text" id="progress-text">0%</span>
+        </div>
+
+        <div class="message-container" id="message-container"></div>
+
+        <div class="result" id="result-section">
+            </div>
+        </div>
 </body>
 </html>
